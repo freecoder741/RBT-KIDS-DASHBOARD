@@ -1,0 +1,50 @@
+let loggedIn = false;
+const recordedData = [];
+
+function login() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  if (username === "test" && password === "0000") {
+    loggedIn = true;
+    document.getElementById("login-page").classList.add("hidden");
+    document.getElementById("dashboard-header").classList.remove("hidden");
+    document.getElementById("dashboard-container").classList.remove("hidden");
+  } else {
+    alert("Invalid username or password.");
+  }
+}
+
+function recordActivity(activity, result) {
+  if (!loggedIn) {
+    alert("You must log in before accessing activities.");
+    return;
+  }
+  recordedData.push({ activity, result });
+  alert(`Recorded: ${activity} - ${result}`);
+}
+
+function promptAdminAccess() {
+  const adminPin = prompt("Enter Admin PIN:");
+  if (adminPin === "1234") {
+    showAdminResults();
+  } else {
+    alert("Invalid PIN!");
+  }
+}
+
+function showAdminResults() {
+  const adminResultsContainer = document.getElementById("admin-results");
+  adminResultsContainer.innerHTML =
+    recordedData.length > 0
+      ? recordedData.map((data, index) => `<p>${index + 1}. ${data.activity}: ${data.result}</p>`).join("")
+      : "<p>No results recorded yet.</p>";
+
+  document.getElementById("admin-modal").classList.remove("hidden");
+  document.getElementById("admin-modal-backdrop").classList.remove("hidden");
+}
+
+function hideAdminModal() {
+  document.getElementById("admin-modal").classList.add("hidden");
+  document.getElementById("admin-modal-backdrop").classList.add("hidden");
+}
