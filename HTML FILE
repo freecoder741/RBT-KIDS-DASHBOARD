@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RBT Dashboard</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f5f5f5;
+      color: #333;
+      padding: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Sign-in Page */
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .login-container h1 {
+      font-size: 24px;
+      color: #0078d4;
+      margin-bottom: 20px;
+    }
+
+    .login-container input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background-color: #0078d4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-container button:hover {
+      background-color: #005bb5;
+    }
+
+    /* Dashboard Styles */
+    header {
+      width: 100%;
+      background-color: #0078d4;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .dashboard-container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      max-width: 1200px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .sidebar {
+      width: 25%;
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .activity-item {
+      margin-bottom: 20px;
+    }
+
+    .activity-item h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .outcome-buttons button {
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .outcome-buttons .err {
+      background-color: #e57373;
+    }
+
+    .outcome-buttons .nr {
+      background-color: #64b5f6;
+    }
+
+    .outcome-buttons .ind {
+      background-color: #81c784;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex-grow: 1;
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Admin Modal */
+    .admin-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      max-height: 70%; /* Set maximum height */
+      overflow-y: auto; /* Enable vertical scrolling */
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <!-- Sign-In Page -->
+  <div class="login-container" id="login-page">
+    <h1>Welcome to RBT Dashboard</h1>
+    <input type="text" id="username" placeholder="Enter username">
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="login()">Sign In</button>
+  </div>
+
+  <!-- Dashboard -->
+  <header class="hidden" id="dashboard-header">
+    RBT Dashboard
+  </header>
+
+  <div class="dashboard-container hidden" id="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul>
+        <li class="activity-item">
+          <h3>TACT ACT AND AIM</h3>
+          <div class="outcome-buttons">
+            <button class="err" onclick="recordActivity('TACT ACT AND AIM', 'ERR')">ERR</button>
+            <button class="nr" onclick="recordActivity('TACT ACT AND AIM', 'NR')">NR</button>
+            <button class="ind" onclick="recordActivity('TACT ACT AND AIM', 'IND')">IND</button>
+          </div>
+        </li>
+        <li class="activity-item">
+          <h3>TACT EMOTION SELF</h3>
+          <div class="outcome-buttons">
+            <button class="err" onclick="recordActivity('TACT EMOTION SELF', 'ERR')">ERR</button>
+            <button class="nr" onclick="recordActivity('TACT EMOTION SELF', 'NR')">NR</button>
+            <button class="ind" onclick="recordActivity('TACT EMOTION SELF', 'IND')">IND</button>
+          </div>
+        </li>
+        <!-- New Buttons -->
+        <li class="activity-item">
+          <h3>TAKING PERSPECTIVE OF OTHERS</h3>
+          <div class="outcome-buttons">
+            <button class="err" onclick="recordActivity('TAKING PERSPECTIVE OF OTHERS', 'ERR')">ERR</button>
+            <button class="nr" onclick="recordActivity('TAKING PERSPECTIVE OF OTHERS', 'NR')">NR</button>
+            <button class="ind" onclick="recordActivity('TAKING PERSPECTIVE OF OTHERS', 'IND')">IND</button>
+          </div>
+        </li>
+        <li class="activity-item">
+          <h3>POLITELY MAND</h3>
+          <div class="outcome-buttons">
+            <button class="err" onclick="recordActivity('POLITELY MAND', 'ERR')">ERR</button>
+            <button class="nr" onclick="recordActivity('POLITELY MAND', 'NR')">NR</button>
+            <button class="ind" onclick="recordActivity('POLITELY MAND', 'IND')">IND</button>
+          </div>
+        </li>
+        <li class="activity-item">
+          <h3>PHONE TIME </h3>
+          <div class="outcome-buttons">
+            <button class="err" onclick="recordActivity('PHONE TIME', 'YES')">YES</button>
+            <button class="nr" onclick="recordActivity('PHONE TIME', 'NO')">NO</button>
+            <button class="ind" onclick="recordActivity('PHONE TIME', 'MAYBE')">MAYBE</button>
+          </div>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2>Admin Access</h2>
+      <button onclick="promptAdminAccess()">ADMIN ACCESS</button>
+    </main>
+  </div>
+
+  <!-- Admin Modal -->
+  <div class="modal-backdrop hidden" id="admin-modal-backdrop" onclick="hideAdminModal()"></div>
+  <div class="admin-modal hidden" id="admin-modal">
+    <h2>Admin Results</h2>
+    <div id="admin-results"></div>
+    <button onclick="hideAdminModal()">Close</button>
+  </div>
+
+  <script>
+    let loggedIn = false;
+    const recordedData = [];
+
+    function login() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (username === "test" && password === "0000") {
+        loggedIn = true;
+        document.getElementById("login-page").classList.add("hidden");
+        document.getElementById("dashboard-header").classList.remove("hidden");
+        document.getElementById("dashboard-container").classList.remove("hidden");
+      } else {
+        alert("Invalid username or password.");
+      }
+    }
+
+    function recordActivity(activity, result) {
+      if (!loggedIn) {
+        alert("You must log in before accessing activities.");
+        return;
+      }
+      recordedData.push({ activity, result });
+      alert(`Recorded: ${activity} - ${result}`);
+    }
+
+    function promptAdminAccess() {
+      const adminPin = prompt("Enter Admin PIN:");
+      if (adminPin === "1234") {
+        showAdminResults();
+      } else {
+        alert("Invalid PIN!");
+      }
+    }
+
+    function showAdminResults() {
+      const adminResultsContainer = document.getElementById("admin-results");
+      adminResultsContainer.innerHTML =
+        recordedData.length > 0
+          ? recordedData.map((data, index) => `<p>${index + 1}. ${data.activity}: ${data.result}</p>`).join("")
+          : "<p>No results recorded yet.</p>";
+
+      document.getElementById("admin-modal").classList.remove("hidden");
+      document.getElementById("admin-modal-backdrop").classList.remove("hidden");
+    }
+
+    function hideAdminModal() {
+      document.getElementById("admin-modal").classList.add("hidden");
+      document.getElementById("admin-modal-backdrop").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>
