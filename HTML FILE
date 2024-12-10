@@ -22,52 +22,7 @@
       padding: 20px;
     }
 
-    .hidden {
-      display: none;
-    }
-
-    /* Sign-in Page */
-    .login-container {
-      width: 100%;
-      max-width: 400px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      text-align: center;
-    }
-
-    .login-container h1 {
-      font-size: 24px;
-      color: #0078d4;
-      margin-bottom: 20px;
-    }
-
-    .login-container input {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    .login-container button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 15px;
-      background-color: #0078d4;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .login-container button:hover {
-      background-color: #005bb5;
-    }
-
-    /* Dashboard Styles */
+    /* Header */
     header {
       width: 100%;
       background-color: #0078d4;
@@ -79,6 +34,23 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
 
+    /* Notification Bar */
+    .notification {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffcc00;
+      color: black;
+      padding: 10px;
+      border-radius: 5px;
+      width: 80%;
+      text-align: center;
+      display: none;
+      z-index: 1000;
+    }
+
+    /* Dashboard Layout */
     .dashboard-container {
       display: flex;
       flex-direction: row;
@@ -88,6 +60,7 @@
       margin-top: 20px;
     }
 
+    /* Sidebar */
     .sidebar {
       width: 25%;
       background-color: #ffffff;
@@ -96,49 +69,68 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .sidebar ul {
-      list-style: none;
-    }
-
-    .activity-item {
-      margin-bottom: 20px;
-    }
-
-    .activity-item h3 {
+    .activity-label {
       font-size: 18px;
-      margin-bottom: 10px;
+      font-weight: bold;
+      margin-top: 20px;
     }
 
-    .outcome-buttons button {
-      padding: 10px 15px;
-      margin: 5px;
-      border-radius: 5px;
-      border: none;
-      color: white;
+    .result-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+    }
+
+    .result-buttons button {
+      width: 30%;
+      background-color: #FD0E67;
+      color: black;
       font-size: 14px;
+      padding: 5px;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s;
     }
 
-    .outcome-buttons .err {
-      background-color: #e57373;
+    .result-buttons button:hover {
+      background-color: #e69500;
     }
 
-    .outcome-buttons .nr {
-      background-color: #64b5f6;
-    }
-
-    .outcome-buttons .ind {
-      background-color: #81c784;
-    }
-
-    /* Main Content */
-    .main-content {
-      flex-grow: 1;
+    /* Note Submission */
+    .note-submission {
+      margin-top: 20px;
+      padding: 15px;
       background-color: #ffffff;
       border-radius: 10px;
-      padding: 20px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      text-align: center;
+    }
+
+    .note-submission textarea {
+      width: 90%;
+      height: 80px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .note-submission button {
+      background-color: #0078d4;
+      color: white;
+      font-size: 14px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .note-submission button:hover {
+      background-color: #005bb5;
     }
 
     /* Admin Modal */
@@ -146,155 +138,267 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      border-radius: 10px;
+      transform: translate(-50%, -50%) scale(0);
+      background-color: #ffef96;
+      border-radius: 15px;
       padding: 20px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      width: 90%;
+      width: 60%;
       max-width: 500px;
-      max-height: 70%; /* Set maximum height */
-      overflow-y: auto; /* Enable vertical scrolling */
+      display: none;
+      animation: popIn 0.5s forwards;
     }
 
-    .modal-backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
+    @keyframes popIn {
+      from {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+      }
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .admin-modal h2 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .admin-modal input {
       width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .admin-modal button {
+      width: 100%;
+      padding: 10px;
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .admin-modal button:hover {
+      background-color: #e64a19;
+    }
+
+    /* Admin Data Display */
+    .admin-data {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #ffffff;
+      border: 2px solid #ff5722;
+      border-radius: 10px;
+      overflow-y: auto;
+      max-height: 400px;
+      margin-bottom: 20px;
+    }
+
+    .admin-data table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .admin-data th,
+    .admin-data td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .admin-data th {
+      background-color: #f4f4f4;
+    }
+
+    .admin-data pre {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .admin-data .notes {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .admin-data .notes li {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    /* Admin Button at Bottom */
+    .admin-button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #ff5722;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .admin-button:hover {
+      background-color: #e64a19;
     }
   </style>
 </head>
 <body>
-  <!-- Sign-In Page -->
-  <div class="login-container" id="login-page">
-    <h1>Welcome to RBT Dashboard</h1>
-    <input type="text" id="username" placeholder="Enter username">
-    <input type="password" id="password" placeholder="Enter password">
-    <button onclick="login()">Sign In</button>
-  </div>
-
-  <!-- Dashboard -->
-  <header class="hidden" id="dashboard-header">
+  <header>
     RBT Dashboard
   </header>
 
-  <div class="dashboard-container hidden" id="dashboard-container">
-    <!-- Sidebar -->
+  <!-- Notification Bar -->
+  <div id="notification" class="notification">
+    <span id="notification-message"></span>
+  </div>
+
+  <div class="dashboard-container">
     <aside class="sidebar">
-      <ul>
-        <li class="activity-item">
-          <h3>TACT ACT AND AIM</h3>
-          <div class="outcome-buttons">
-            <button class="err" onclick="recordActivity('TACT ACT AND AIM', 'ERR')">ERR</button>
-            <button class="nr" onclick="recordActivity('TACT ACT AND AIM', 'NR')">NR</button>
-            <button class="ind" onclick="recordActivity('TACT ACT AND AIM', 'IND')">IND</button>
-          </div>
-        </li>
-        <li class="activity-item">
-          <h3>TACT EMOTION SELF</h3>
-          <div class="outcome-buttons">
-            <button class="err" onclick="recordActivity('TACT EMOTION SELF', 'ERR')">ERR</button>
-            <button class="nr" onclick="recordActivity('TACT EMOTION SELF', 'NR')">NR</button>
-            <button class="ind" onclick="recordActivity('TACT EMOTION SELF', 'IND')">IND</button>
-          </div>
-        </li>
-        <!-- New Buttons -->
-        <li class="activity-item">
-          <h3>TAKING PERSPECTIVE OF OTHERS</h3>
-          <div class="outcome-buttons">
-            <button class="err" onclick="recordActivity('TAKING PERSPECTIVE OF OTHERS', 'ERR')">ERR</button>
-            <button class="nr" onclick="recordActivity('TAKING PERSPECTIVE OF OTHERS', 'NR')">NR</button>
-            <button class="ind" onclick="recordActivity('TAKING PERSPECTIVE OF OTHERS', 'IND')">IND</button>
-          </div>
-        </li>
-        <li class="activity-item">
-          <h3>POLITELY MAND</h3>
-          <div class="outcome-buttons">
-            <button class="err" onclick="recordActivity('POLITELY MAND', 'ERR')">ERR</button>
-            <button class="nr" onclick="recordActivity('POLITELY MAND', 'NR')">NR</button>
-            <button class="ind" onclick="recordActivity('POLITELY MAND', 'IND')">IND</button>
-          </div>
-        </li>
-        <li class="activity-item">
-          <h3>PHONE TIME </h3>
-          <div class="outcome-buttons">
-            <button class="err" onclick="recordActivity('PHONE TIME', 'YES')">YES</button>
-            <button class="nr" onclick="recordActivity('PHONE TIME', 'NO')">NO</button>
-            <button class="ind" onclick="recordActivity('PHONE TIME', 'MAYBE')">MAYBE</button>
-          </div>
-        </li>
-      </ul>
+      <!-- Activity Buttons -->
+      <div class="activity-label">❤️TACT ACT AND AIM❤️</div>
+      <div class="result-buttons">
+        <button onclick="recordResult('❤️TACT ACT AND AIM❤️', 'IND')">IND</button>
+        <button onclick="recordResult('❤️TACT ACT AND AIM❤️', 'ERR')">ERR</button>
+        <button onclick="recordResult('❤️TACT ACT AND AIM❤️', 'NR')">NR</button>
+      </div>
+
+      <div class="activity-label">😂TACT EMOTION SELF😂</div>
+      <div class="result-buttons">
+        <button onclick="recordResult('😂TACT EMOTION SELF😂', 'IND')">IND</button>
+        <button onclick="recordResult('😂TACT EMOTION SELF😂', 'ERR')">ERR</button>
+        <button onclick="recordResult('😂TACT EMOTION SELF😂', 'NR')">NR</button>
+      </div>
+
+      <div class="activity-label">👨‍👩‍👧‍👦TAKING PERSPECTIVE OF OTHERS👨‍👩‍👧‍👦</div>
+      <div class="result-buttons">
+        <button onclick="recordResult('👨‍👩‍👧‍👦TAKING PERSPECTIVE OF OTHERS👨‍👩‍👧‍👦', 'IND')">IND</button>
+        <button onclick="recordResult('👨‍👩‍👧‍👦TAKING PERSPECTIVE OF OTHERS👨‍👩‍👧‍👦', 'ERR')">ERR</button>
+        <button onclick="recordResult('👨‍👩‍👧‍👦TAKING PERSPECTIVE OF OTHERS👨‍👩‍👧‍👦', 'NR')">NR</button>
+      </div>
     </aside>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <h2>Admin Access</h2>
-      <button onclick="promptAdminAccess()">ADMIN ACCESS</button>
-    </main>
+    <div class="note-submission">
+      <!-- Note Submission Section -->
+      <textarea id="note-input" placeholder="Write a note..."></textarea>
+      <button onclick="submitNote()">Submit Note</button>
+    </div>
   </div>
 
-  <!-- Admin Modal -->
-  <div class="modal-backdrop hidden" id="admin-modal-backdrop" onclick="hideAdminModal()"></div>
-  <div class="admin-modal hidden" id="admin-modal">
-    <h2>Admin Results</h2>
-    <div id="admin-results"></div>
-    <button onclick="hideAdminModal()">Close</button>
+  <!-- Admin Access Modal -->
+  <div id="adminModal" class="admin-modal">
+    <h2>Admin Access</h2>
+    <input type="text" id="admin-username" placeholder="Username" />
+    <input type="password" id="admin-password" placeholder="Password" />
+    <button onclick="loginAdmin()">Login</button>
   </div>
+
+  <!-- Admin Data Display -->
+  <div id="adminData" class="admin-data" style="display: none;">
+    <h3>Admin Data</h3>
+    <div id="adminDataContainer">
+      <table>
+        <thead>
+          <tr>
+            <th>Activity</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody id="data-table-body"></tbody>
+      </table>
+      <div id="notes-container">
+        <h4>Submitted Notes</h4>
+        <ul id="notes-list" class="notes"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Login Button -->
+  <button id="adminButton" class="admin-button" onclick="openAdminModal()">Admin Access</button>
 
   <script>
-    let loggedIn = false;
-    const recordedData = [];
+    let activitiesData = [];
+    let notes = [];
+    const validUsers = [
+      { username: "admin", password: "password123" }, // example user
+      // Add more users here if needed
+    ];
 
-    function login() {
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+    // Open Admin Modal
+    function openAdminModal() {
+      document.getElementById("adminModal").style.display = "block";
+    }
 
-      if (username === "test" && password === "0000") {
-        loggedIn = true;
-        document.getElementById("login-page").classList.add("hidden");
-        document.getElementById("dashboard-header").classList.remove("hidden");
-        document.getElementById("dashboard-container").classList.remove("hidden");
+    // Admin Login Validation
+    function loginAdmin() {
+      const username = document.getElementById("admin-username").value;
+      const password = document.getElementById("admin-password").value;
+      const user = validUsers.find(u => u.username === username && u.password === password);
+
+      if (user) {
+        document.getElementById("adminModal").style.display = "none";
+        displayAdminData();
       } else {
-        alert("Invalid username or password.");
+        alert("Invalid username or password!");
       }
     }
 
-    function recordActivity(activity, result) {
-      if (!loggedIn) {
-        alert("You must log in before accessing activities.");
-        return;
+    // Display Admin Data
+    function displayAdminData() {
+      const tableBody = document.getElementById("data-table-body");
+      tableBody.innerHTML = "";
+      activitiesData.forEach(activity => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${activity.name}</td><td>${activity.result}</td>`;
+        tableBody.appendChild(row);
+      });
+
+      const notesList = document.getElementById("notes-list");
+      notesList.innerHTML = "";
+      notes.forEach(note => {
+        const listItem = document.createElement("li");
+        listItem.textContent = note;
+        notesList.appendChild(listItem);
+      });
+
+      document.getElementById("adminData").style.display = "block";
+    }
+
+    // Record Activity Result
+    function recordResult(activityName, result) {
+      activitiesData.push({ name: activityName, result: result });
+      showNotification(`${activityName} recorded as ${result}`);
+    }
+
+    // Submit Note
+    function submitNote() {
+      const note = document.getElementById("note-input").value;
+      if (note) {
+        notes.push(note);
+        document.getElementById("note-input").value = "";
+        showNotification("Note submitted successfully.");
       }
-      recordedData.push({ activity, result });
-      alert(`Recorded: ${activity} - ${result}`);
     }
 
-    function promptAdminAccess() {
-      const adminPin = prompt("Enter Admin PIN:");
-      if (adminPin === "1234") {
-        showAdminResults();
-      } else {
-        alert("Invalid PIN!");
-      }
-    }
-
-    function showAdminResults() {
-      const adminResultsContainer = document.getElementById("admin-results");
-      adminResultsContainer.innerHTML =
-        recordedData.length > 0
-          ? recordedData.map((data, index) => `<p>${index + 1}. ${data.activity}: ${data.result}</p>`).join("")
-          : "<p>No results recorded yet.</p>";
-
-      document.getElementById("admin-modal").classList.remove("hidden");
-      document.getElementById("admin-modal-backdrop").classList.remove("hidden");
-    }
-
-    function hideAdminModal() {
-      document.getElementById("admin-modal").classList.add("hidden");
-      document.getElementById("admin-modal-backdrop").classList.add("hidden");
+    // Show Notification
+    function showNotification(message) {
+      const notification = document.getElementById("notification");
+      document.getElementById("notification-message").textContent = message;
+      notification.style.display = "block";
+      setTimeout(() => notification.style.display = "none", 3000);
     }
   </script>
 </body>
