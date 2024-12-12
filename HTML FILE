@@ -254,7 +254,7 @@
     .admin-button:hover {
       background-color: #e64a19;
     }
-  </style>
+ </style>
 </head>
 <body>
   <header>
@@ -288,6 +288,20 @@
         <button onclick="recordResult('👨‍👩‍👧‍👦TAKING PERSPECTIVE OF OTHERS👨‍👩‍👧‍👦', 'IND')">IND</button>
         <button onclick="recordResult('👨‍👩‍👧‍👦TAKING PERSPECTIVE OF OTHERS👨‍👩‍👧‍👦', 'ERR')">ERR</button>
         <button onclick="recordResult('👨‍👩‍👧‍👦TAKING PERSPECTIVE OF OTHERS👨‍👩‍👧‍👦', 'NR')">NR</button>
+      </div>
+
+      <div class="activity-label">👦💬POLITELY MAND👦💬</div>
+      <div class="result-buttons">
+        <button onclick="recordResult('👦💬POLITELY MAND👦💬', 'IND')">IND</button>
+        <button onclick="recordResult('👦💬POLITELY MAND👦💬', 'ERR')">ERR</button>
+        <button onclick="recordResult('👦💬POLITELY MAND👦💬', 'NR')">NR</button>
+      </div>
+
+      <div class="activity-label">📱PHONE TIME📱</div>
+      <div class="result-buttons">
+        <button onclick="recordResult('📱PHONE TIME📱', 'YES')">YES</button>
+        <button onclick="recordResult('📱PHONE TIME📱', 'NO')">NO</button>
+        <button onclick="recordResult('📱PHONE TIME📱', 'MAYBE')">MAYBE</button>
       </div>
     </aside>
 
@@ -334,6 +348,15 @@
     let notes = [];
     const validUsers = [
       { username: "admin", password: "password123" }, // example user
+      { username: "guest", password: "0000" }, 
+      { username: "fav rbt!", password: "best person ever!" },
+      { username: "libbith", password: "spongebob squarepants" },
+      { username: "mac and cheese", password: "w/ tuna" }, 
+      { username: "RBT", password: "goodppl" },
+      { username: "austin", password: "1057" },
+      { username: "codemaster", password: "7410" },
+      
+      
       // Add more users here if needed
     ];
 
